@@ -29,18 +29,27 @@ int main(int argc, char *argv[]){
 void *myfunc1(void *ptr){
 	int i;
 	char *msg = (char *)ptr;
+
+	pthread_mutex_lock(&lock);
+
 	printf("msg: %s\n", msg);
 
 	for(i=0; i<100; i++){
 		printf("X");
 		a[i] = i;
 	}
+
 	printf("\n");
+
+	pthread_mutex_unlock(&lock);
 }
 
 void *myfunc2(void *ptr){
 	int i;
 	char *msg = (char *)ptr;
+	
+	pthread_mutex_lock(&lock);
+
 	printf("msg: %s\n", msg);
 
 	for(i=0; i<100; i++){
@@ -48,4 +57,6 @@ void *myfunc2(void *ptr){
 		a[i] = i;
 	}
 	printf("\n");
+
+	pthread_mutex_unlock(&lock);
 }
